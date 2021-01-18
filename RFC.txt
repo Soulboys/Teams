@@ -1,0 +1,55 @@
+Our RFC:
+
+    The client ask for a command, then the server will answer with one of the follwing RFC and others informations.
+    The client will not wait for the return of the command, but when he receive an RFC, he will handle it.
+
+//General
+RFC_NO_RETURN "NOR" : Used when a command doesn't return anything
+RFC_END "END" : Used to know the end of the transmission of a command
+
+// ERROR
+    "ER" is used to indicate an error. You just have to add the type of the error ("ER" + "I" -> "ERI")>
+RFC_INTERNAL_ERROR "ERI" : Used when the server meet an error (malloc failed, ...)
+RFC_UNKNOWN_CMD "ERC" : Used when the asking command is unknown
+RFC_ARGUMENT_ERROR "ERA" : Used when the number of arguments or there are missing quotes
+RFC_BAD_UUID "ERU" : Used when the user ask for an incorrect uuid
+RFC_ALREADY "ERD" : Used when the user ask to create a ressource that has been already created
+
+//RFC_UUID_TYPE
+RFC_MSG "MSG" : Used to define a private message or a thread reply uuid
+RFC_TEAM "TEA" : Used to define a team uuid
+RFC_CHANNEL "CHA" : Used to define a channel uuid
+RFC_THREAD "THR" : Used to define a thread uuid
+RFC_USER "USR" : Used to define a user uuid
+
+// TOO LONG
+    "TL" is used to indicate that an argument is too long. You just have to add the type of the argument ("TL" + "N" -> "TLN")
+RFC_TL_NAME "TLN" : Used when the user ask to create a new context (team, channel, thread) and the name is too long
+RFC_TL_BODY "TLB" : Used when the user ask to create a new message and the body is too long
+RFC_TL_DESC "TLD" : Used when the user ask to create a new context (team, channel, thread) and the description is too long
+
+// LOG
+    "TL" is used to indicate it has link with logs. You just have to add the type of the log ("LG" + "I" -> "LGI")
+RFC_LOGIN "LGI" : Used when the user ask to login
+RFC_LOGOUT "LGO" : Used when the user ask to logout
+RFC_UNAUTHORIZED "LGE" : Used when the user ask for a command without a login
+
+//SUBSCRIPTION
+    "SB" is used to indicate it has link with subscription. You just have to add the type of the subscription ("SB" + "I" -> "SBI")
+RFC_SUB_LIST "SBI" : Used when the user ask to print the list of subscribed
+RFC_SUB_JOIN "SBJ" : Used when the user ask to join a team
+RFC_SUB_LEFT "SBL" : Used when the user ask to leave a team
+
+//INFORMATIONS
+RFC_INFO "IFO" : Used when the user ask to display context/user informations
+RFC_LIST "LST" : Used when the user ask to display all contextes or messages
+
+//CREATE
+    "CR" is used to indicate something was created. You just have to add if it's a context or a reply ("CR" + "M" -> "CRM")
+RFC_CREATE "CRT" : Used when the user ask to create a context ("T" for team)
+RFC_CREATE_MSG "CRM" : Used when the user ask to create a reply ("M" for messages)
+
+//MESSAGES
+    "MG" is used to indicate it has a link with private messages. You just have to add if it's a send or the user ask for the conversation ("MG" + "S" -> "MGS")
+RFC_SEND "MGS" : Used when the user ask to send a private message
+RFC_CONVERSATION "MGC" : Used when the user ask for the conversation with a user
